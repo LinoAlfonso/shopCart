@@ -12,9 +12,12 @@
       android:layout_height="wrap_content">
       <androidx.appcompat.widget.Toolbar
           android:id="@+id/toolbarMain"
+          android:theme="@style/Theme.Toolbar"
           android:layout_width="match_parent"
           android:layout_height="wrap_content">
           <TextView
+              android:id="@+id/toolbarTitle"
+              android:textColor="@color/white"
               android:layout_gravity="center"
               android:text="@string/title_app"
               android:layout_width="wrap_content"
@@ -24,7 +27,10 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_gravity="end"
-             android:src="@drawable/ic_shopping_cart"/>
+             android:layout_margin="10dp"
+             android:background="@android:color/transparent"
+             android:src="@drawable/ic_shopping_cart"
+              />
       </androidx.appcompat.widget.Toolbar>
   </com.google.android.material.appbar.AppBarLayout>
 
@@ -32,13 +38,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
         <fragment
             android:id="@+id/fragContent"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:navGraph="@navigation/nav_graph"
-            app:defaultNavHost="true"/>
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph" />
     </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

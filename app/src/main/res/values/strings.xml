@@ -2,5 +2,6 @@
     <string name="app_name">ShopCartMerqueo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_app">Mi app</string>
+    <string name="title_app">En Cine</string>
+    <string name="add_cart">Agregar</string>
 </resources>

@@ -1,6 +1,7 @@
-package com.lino.shopcart.models
+package com.lino.shopcart.models.response
 
 import com.google.gson.annotations.SerializedName
+import com.lino.shopcart.models.Movie
 
 data class MoviesResponse(
     @SerializedName("page")

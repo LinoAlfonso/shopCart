@@ -1,4 +1,4 @@
-package com.lino.shopcart.models
+package com.lino.shopcart.models.response
 
 import com.google.gson.annotations.SerializedName
 

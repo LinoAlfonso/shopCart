@@ -1,9 +1,8 @@
 package com.lino.shopcart.service
 
-import com.lino.shopcart.models.MoviesResponse
+import com.lino.shopcart.models.response.MoviesResponse
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Url
 
 interface APIClient {
 

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
+    android:label="En Cine"
     app:startDestination="@id/productsFragment">
 
     <fragment
         android:id="@+id/productsFragment"
-        android:name="com.lino.shopcart.view.ui.fragments.ProductsFragment"
-        android:label="fragment_products"
-        tools:layout="@layout/fragment_products" >
+        android:name="com.lino.shopcart.view.ui.fragments.MoviesFragment"
+        tools:layout="@layout/fragment_movies">
         <action
             android:id="@+id/action_productsFragment_to_detailProductFragment"
             app:destination="@id/detailProductFragment" />
@@ -19,9 +19,8 @@
     </fragment>
     <fragment
         android:id="@+id/detailProductFragment"
-        android:name="com.lino.shopcart.view.ui.fragments.DetailProductFragment"
-        android:label="fragment_detail_product"
-        tools:layout="@layout/fragment_detail_product" >
+        android:name="com.lino.shopcart.view.ui.fragments.DetailMovieFragment"
+        tools:layout="@layout/fragment_detail_movie">
         <action
             android:id="@+id/action_detailProductFragment_to_shopCartFragment"
             app:destination="@id/shopCartFragment" />
@@ -29,6 +28,5 @@
     <fragment
         android:id="@+id/shopCartFragment"
         android:name="com.lino.shopcart.view.ui.fragments.ShopCartFragment"
-        android:label="fragment_shop_cart"
         tools:layout="@layout/fragment_shop_cart" />
 </navigation>

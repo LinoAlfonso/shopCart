@@ -10,7 +10,7 @@ import com.lino.shopcart.models.Movie
 import com.lino.shopcart.utils.bindImageUrl
 import kotlinx.android.synthetic.main.item_product.view.*
 
-class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.ProductGridViewHolder>() {
+class MovieAdapter(val movieListener: MovieListener) : RecyclerView.Adapter<MovieAdapter.ProductGridViewHolder>() {
 
     var listItemsMovies = ArrayList<Movie>()
 
@@ -24,21 +24,26 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.ProductGridViewHold
     )
 
     override fun onBindViewHolder(holder: ProductGridViewHolder, position: Int) {
-        //holder.itemProduct.movie = listItemsMovies[position]
-        holder.bind(listItemsMovies[position])
+        holder.bind(listItemsMovies[position],position,movieListener)
+
     }
 
     override fun getItemCount() = listItemsMovies.size
 
     class ProductGridViewHolder(val itemProduct: ItemProductBinding) :
         RecyclerView.ViewHolder(itemProduct.root){
-        fun bind(item: Movie){
+        fun bind(item: Movie,position: Int,movieListener: MovieListener){
             itemProduct.movie = item
             itemView.imgProduct.bindImageUrl(
-                url = "https://image.tmdb.org/t/p/w500/"+item.posterPath,
+                url = "https://image.tmdb.org/t/p/w500/"+item.backdropPath,
                 placeholder = R.drawable.ic_broken_image,
                 errorPlaceholder = R.drawable.ic_broken_image
             )
+
+            itemView.imgProduct.setOnClickListener {
+                movieListener.onMovieClicked(item,position)
+            }
+
         }
         }
 

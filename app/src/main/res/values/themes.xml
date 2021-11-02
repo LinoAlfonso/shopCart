@@ -19,4 +19,16 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="cornerRadiusImage" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10%</item>
+    </style>
+
+    <style name="Theme.Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <!-- Primary brand color. -->
+        <item name="navigationIconTint">@color/white</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+
 </resources>
