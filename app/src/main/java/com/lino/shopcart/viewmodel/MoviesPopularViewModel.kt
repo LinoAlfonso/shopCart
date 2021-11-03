@@ -3,57 +3,43 @@ package com.lino.shopcart.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.lino.shopcart.apiRetrofit.RetrofitAPIHelper
 import com.lino.shopcart.models.response.MessageResponse
 import com.lino.shopcart.models.Movie
 import com.lino.shopcart.models.response.MoviesResponse
+import com.lino.shopcart.repository.MoviesRepository
+import com.lino.shopcart.utils.Resource
 import com.lino.shopcart.utils.Utils
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MoviesPopularViewModel:ViewModel() {
-    private var apiMovie = RetrofitAPIHelper.getApiCalls()
-    val listMoviesPopular: MutableLiveData<List<Movie>> = MutableLiveData()
-    private val _messageError = MutableLiveData<MessageResponse>()
-    val messageError: LiveData<MessageResponse> = _messageError
-    private val utils = Utils()
-    val isLoading = MutableLiveData<Boolean>()
+class MoviesPopularViewModel(
+    val moviesRepository: MoviesRepository
+):ViewModel() {
+
+    val moviesPopular: MutableLiveData<Resource<MoviesResponse>> = MutableLiveData()
 
     fun refreshGetMovies() {
-        getListMoviesPopular()
+        getMoviesPopular()
     }
 
-    fun getListMoviesPopular(){
-        isLoading.value = true
-        val call = apiMovie.getMoviesPopular()
-        call.enqueue(object : Callback<MoviesResponse> {
-            override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
-                processFinished()
+    fun getMoviesPopular() = viewModelScope.launch {
+        moviesPopular.postValue(Resource.Loading())
+        val response = moviesRepository.getMovies()
+        moviesPopular.postValue(handleMoviesResponse(response))
+    }
+
+    private fun handleMoviesResponse(response: Response<MoviesResponse>):Resource<MoviesResponse>{
+        if (response.isSuccessful){
+            response.body()?.let { resultResponse ->
+                return  Resource.Success(resultResponse)
             }
-            override fun onResponse(
-                call: Call<MoviesResponse>,
-                response: Response<MoviesResponse>
-            ) {
-                if(response.isSuccessful){
-                    response.body()?.let {moviesResponse->
-                        moviesResponse.listMovies.let {
-                            listMoviesPopular.postValue(it)
-                        }
-                    }
-                }else {
-                    response.errorBody()?.let { errorBody ->
-                        val errorBodyString = errorBody.string()
-                        _messageError.value = utils.covertResponseMessage(errorBodyString)
-                    }
-                }
-                processFinished()
-            }
-
-        })
+        }
+        return  Resource.Error(response.message())
     }
 
-    fun processFinished(){
-        isLoading.value = false
-    }
+
 }

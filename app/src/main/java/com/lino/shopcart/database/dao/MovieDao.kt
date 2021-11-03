@@ -1,19 +1,21 @@
 package com.lino.shopcart.database.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.lino.shopcart.database.entity.MovieEntity
+import com.lino.shopcart.models.Movie
+
 
 @Dao
 interface MovieDao {
-    @Query("SELECT * FROM MovieEntity")
-    fun getAllMovies():MutableList<MovieEntity>
+    @Query("SELECT * FROM movies")
+    fun getAllMovies():LiveData<List<Movie>>
 
-    @Insert
-    fun addMovie(movieEntity: MovieEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addMovie(movieEntity: Movie)
 
     @Update
-    fun updateMovie(movieEntity: MovieEntity)
+    suspend fun updateMovie(movieEntity: Movie)
 
     @Delete
-    fun deleteMovie(movieEntity: MovieEntity)
+    suspend fun deleteMovie(movieEntity: Movie)
 }

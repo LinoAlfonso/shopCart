@@ -1,5 +1,6 @@
 package com.lino.shopcart.apiRetrofit
 
+import com.lino.shopcart.utils.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -7,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitAPIHelper {
 
-    val url= "https://api.themoviedb.org/3/"
+
 
     private var retrofit: Retrofit? = null
 
@@ -26,7 +27,7 @@ object RetrofitAPIHelper {
     }
 
     fun getApiCalls() : APIClient{
-        return getClient(url)!!.create(APIClient::class.java)
+        return getClient(BASE_URL)!!.create(APIClient::class.java)
     }
 
 

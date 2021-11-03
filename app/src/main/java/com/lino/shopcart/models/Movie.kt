@@ -1,8 +1,13 @@
 package com.lino.shopcart.models
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-
+@Entity(
+    tableName = "Movies"
+)
 data class Movie (
+    @PrimaryKey(autoGenerate = true) var idMovie: Int?=null,
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")
