@@ -4,22 +4,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
+import com.lino.shopcart.MainActivity
 import com.lino.shopcart.R
+import com.lino.shopcart.database.ShopCartMovieDataBase
 import com.lino.shopcart.databinding.FragmentDetailMovieBinding
 import com.lino.shopcart.models.Movie
+import com.lino.shopcart.repository.MoviesRepository
 import com.lino.shopcart.utils.bindImageUrl
-import com.lino.shopcart.viewmodel.DetailMovieViewModel
+import com.lino.shopcart.viewmodel.MoviesPopularViewModel
+import com.lino.shopcart.viewmodel.MoviesPopularViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_detail_movie.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class DetailMovieFragment : Fragment() {
 
-    private lateinit var detailMovieViewModel: DetailMovieViewModel
+    private lateinit var moviesPopularViewModel: MoviesPopularViewModel
     private lateinit var _detailMovieBinding: FragmentDetailMovieBinding
     private val binding get() = _detailMovieBinding
     val args : DetailMovieFragmentArgs by navArgs()
@@ -32,28 +44,16 @@ class DetailMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         movie = args.movie
+        moviesPopularViewModel = (activity as MainActivity).moviesPopularViewModel
         setupMovie()
-        //val id_movie = arguments?.getString("idMovie")
-        //detailMovieViewModel =  ViewModelProviders.of(this).get(DetailMovieViewModel::class.java)
-        //id_movie?.let { detailMovieViewModel.getDetailMovie(it) }
-        //observableViewModel(this)
+        updateQuantity()
+        observableViewModel()
     }
 
-    private fun observableViewModel(owner:LifecycleOwner){
-        detailMovieViewModel.isLoading.observe(owner, Observer {loading->
+    private fun observableViewModel(){
 
-        })
-        detailMovieViewModel.detailMovie.observe(owner, Observer {movieDetail->
-       /*     if(movieDetail!=null){
-                binding.detailMovie = movieDetail
-                binding.imgMovieDetail.bindImageUrl(
-                    url = "https://image.tmdb.org/t/p/w500/"+movieDetail.posterPath,
-                    placeholder = R.drawable.ic_broken_image,
-                    errorPlaceholder = R.drawable.ic_broken_image
-                )
-            }*/
-        })
     }
 
     private fun setupMovie(){
@@ -68,9 +68,28 @@ class DetailMovieFragment : Fragment() {
 
     }
 
-    private fun updateQuantity(movie: Movie){
+    private fun updateQuantity(){
+        binding.btnAddQuantity.setOnClickListener {
+            binding.detailMovie!!.countCart++
+            binding.invalidateAll()
+        }
+        binding.btnRemoveQuantity.setOnClickListener {
+            if(binding.detailMovie!!.countCart>0){
+                binding.detailMovie!!.countCart--
+                binding.invalidateAll()
+            }
+        }
         binding.btnAddCart.setOnClickListener {
-            movie.countCart = movie.countCart?.plus(1)
+            if(binding.detailMovie!!.countCart>=1){
+                lifecycleScope.launch {
+                    moviesPopularViewModel.updateQuantityProduct(binding.detailMovie!!.id,binding.detailMovie!!.countCart,true)
+                    withContext(Dispatchers.IO){
+                        Snackbar.make(binding.root,getString(R.string.addProductCart), Snackbar.LENGTH_SHORT).apply {
+                            show()
+                        }
+                    }
+                }
+            }
         }
     }
 

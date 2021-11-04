@@ -12,7 +12,9 @@ class MoviesRepository(
 
     suspend fun saveMoviesDB(listMovies:List<Movie>) = db.movieDao().saveMovies(listMovies)
 
-    suspend fun updateQuantityProduct(movieId: Long, quantity: Int) = db.movieDao().updateQuantityProductCart(movieId,quantity)
+    suspend fun updateQuantityProduct(movieId: Long, quantity: Int, statusInCart:Boolean) = db.movieDao().updateQuantityProductCart(movieId,quantity,statusInCart)
 
     fun getMoviesSave() = db.movieDao().getAllMovies()
+
+    fun getMoviesInCart(statusInCart:Boolean) = db.movieDao().getMoviesInCart(statusInCart)
 }

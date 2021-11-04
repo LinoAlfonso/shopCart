@@ -46,11 +46,13 @@ class MoviesPopularViewModel(
         moviesRepository.saveMoviesDB(listMovies)
     }
 
-    fun updateQuantityProduct(idMovie:Long,quantity:Int) = viewModelScope.launch {
-        moviesRepository.updateQuantityProduct(idMovie,quantity)
+    suspend fun updateQuantityProduct(idMovie:Long,quantity:Int,statusInCart:Boolean) = viewModelScope.launch {
+        moviesRepository.updateQuantityProduct(idMovie,quantity,statusInCart)
     }
 
     fun  getAllMoviesSave() = moviesRepository.getMoviesSave()
+
+    fun  getMoviesInCartSave() = moviesRepository.getMoviesInCart(true)
 
 
 

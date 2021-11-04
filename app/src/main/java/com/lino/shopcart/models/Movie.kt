@@ -35,5 +35,6 @@ data class Movie (
     val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Long,
-    var countCart: Int?= 1
+    var countCart: Int,
+    var inShopCart:Boolean
 ):Serializable

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lino.shopcart.R
 import com.lino.shopcart.databinding.ItemProductBinding
 import com.lino.shopcart.models.Movie
+import com.lino.shopcart.utils.Constants.Companion.ADD_CART
 import com.lino.shopcart.utils.bindImageUrl
 import kotlinx.android.synthetic.main.item_product.view.*
 
@@ -41,7 +42,11 @@ class MovieAdapter(val movieListener: MovieListener) : RecyclerView.Adapter<Movi
             )
 
             itemView.imgProduct.setOnClickListener {
-                movieListener.onMovieClicked(item,position)
+                movieListener.onMovieClicked(item,100)
+            }
+
+            itemView.btnAddCart.setOnClickListener {
+                movieListener.onMovieClicked(item,ADD_CART)
             }
 
         }
