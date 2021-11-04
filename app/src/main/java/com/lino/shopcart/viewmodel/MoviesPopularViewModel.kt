@@ -35,11 +35,24 @@ class MoviesPopularViewModel(
     private fun handleMoviesResponse(response: Response<MoviesResponse>):Resource<MoviesResponse>{
         if (response.isSuccessful){
             response.body()?.let { resultResponse ->
+                saveMoviesDB(resultResponse.listMovies)
                 return  Resource.Success(resultResponse)
             }
         }
         return  Resource.Error(response.message())
     }
+
+    fun saveMoviesDB(listMovies:List<Movie>) = viewModelScope.launch {
+        moviesRepository.saveMoviesDB(listMovies)
+    }
+
+    fun updateQuantityProduct(idMovie:Long,quantity:Int) = viewModelScope.launch {
+        moviesRepository.updateQuantityProduct(idMovie,quantity)
+    }
+
+    fun  getAllMoviesSave() = moviesRepository.getMoviesSave()
+
+
 
 
 }

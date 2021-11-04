@@ -11,11 +11,14 @@ interface MovieDao {
     fun getAllMovies():LiveData<List<Movie>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addMovie(movieEntity: Movie)
+    suspend fun saveMovies(movieEntity: List<Movie>)
 
     @Update
     suspend fun updateMovie(movieEntity: Movie)
 
     @Delete
     suspend fun deleteMovie(movieEntity: Movie)
+
+    @Query("UPDATE movies SET countCart = :quantity WHERE id = :movieId")
+    suspend fun updateQuantityProductCart(movieId: Long, quantity: Int)
 }

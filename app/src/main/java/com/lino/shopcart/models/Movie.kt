@@ -2,16 +2,17 @@ package com.lino.shopcart.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 @Entity(
     tableName = "Movies"
 )
 data class Movie (
-    @PrimaryKey(autoGenerate = true) var idMovie: Int?=null,
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")
     val backdropPath: String,
+    @PrimaryKey
     @SerializedName("id")
     val id: Long,
     @SerializedName("original_language")
@@ -33,5 +34,6 @@ data class Movie (
     @SerializedName("vote_average")
     val voteAverage: Double,
     @SerializedName("vote_count")
-    val voteCount: Long
-)
+    val voteCount: Long,
+    var countCart: Int?= 1
+):Serializable

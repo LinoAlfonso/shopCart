@@ -74,7 +74,10 @@ class MoviesFragment : Fragment(),MovieListener {
     }
 
     override fun onMovieClicked(movie: Movie, position: Int) {
-        val bundle = bundleOf("idMovie" to movie.id.toString())
+        val bundle = Bundle().apply {
+            putSerializable("movie",movie)
+        }
+        //val bundle = bundleOf("idMovie" to movie.id.toString())
         findNavController().navigate(R.id.detailProductFragment,bundle)
     }
 

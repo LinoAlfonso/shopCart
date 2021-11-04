@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_detailProductFragment_to_shopCartFragment"
             app:destination="@id/shopCartFragment" />
+        <argument
+            android:name="movie"
+            app:argType="com.lino.shopcart.models.Movie" />
     </fragment>
     <fragment
         android:id="@+id/shopCartFragment"
