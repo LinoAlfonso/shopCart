@@ -66,21 +66,31 @@ class MoviesFragment : Fragment(),MovieListener {
             viewLifecycleOwner, Observer {response ->
                 when(response){
                     is Resource.Success ->{
+                        hideProgress()
                         response.data?.let { moviesResponse ->
                             moviesAdapter.updateData(moviesResponse.listMovies)
                         }
                     }
                     is Resource.Error ->{
+                        hideProgress()
                         response.message?.let {
                             println(it)
                         }
                     }
                     is Resource.Loading -> {
-
+                        showProgress()
                     }
                 }
             }
         )
+    }
+
+    private fun hideProgress(){
+        binding.rlProducts.visibility = View.GONE
+    }
+
+    private fun showProgress(){
+        binding.rlProducts.visibility = View.VISIBLE
     }
 
     override fun onMovieClicked(movie: Movie, typeClick: Int) {

@@ -4,26 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.lino.shopcart.MainActivity
 import com.lino.shopcart.R
-import com.lino.shopcart.database.ShopCartMovieDataBase
 import com.lino.shopcart.databinding.FragmentDetailMovieBinding
 import com.lino.shopcart.models.Movie
-import com.lino.shopcart.repository.MoviesRepository
 import com.lino.shopcart.utils.bindImageUrl
 import com.lino.shopcart.viewmodel.MoviesPopularViewModel
-import com.lino.shopcart.viewmodel.MoviesPopularViewModelFactory
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_detail_movie.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -49,10 +39,6 @@ class DetailMovieFragment : Fragment() {
         moviesPopularViewModel = (activity as MainActivity).moviesPopularViewModel
         setupMovie()
         updateQuantity()
-        observableViewModel()
-    }
-
-    private fun observableViewModel(){
 
     }
 
