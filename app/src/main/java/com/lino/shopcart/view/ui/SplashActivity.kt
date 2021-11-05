@@ -8,7 +8,9 @@ import android.util.AttributeSet
 import android.view.View
 import com.lino.shopcart.MainActivity
 import com.lino.shopcart.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

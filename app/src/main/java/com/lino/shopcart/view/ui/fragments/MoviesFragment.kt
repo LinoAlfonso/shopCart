@@ -4,37 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.lino.shopcart.MainActivity
 import com.lino.shopcart.R
-import com.lino.shopcart.database.ShopCartMovieDataBase
 import com.lino.shopcart.databinding.FragmentMoviesBinding
 import com.lino.shopcart.models.Movie
-import com.lino.shopcart.repository.MoviesRepository
 import com.lino.shopcart.utils.Constants.Companion.ADD_CART
 import com.lino.shopcart.utils.Resource
 import com.lino.shopcart.view.adapater.MovieAdapter
 import com.lino.shopcart.view.adapater.MovieListener
 import com.lino.shopcart.viewmodel.MoviesPopularViewModel
-import com.lino.shopcart.viewmodel.MoviesPopularViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
+@AndroidEntryPoint
 class MoviesFragment : Fragment(),MovieListener {
 
-    private lateinit var moviesPopularViewModel: MoviesPopularViewModel
+    val moviesPopularViewModel:MoviesPopularViewModel by viewModels()
     private lateinit var moviesAdapter: MovieAdapter
     private lateinit var _moviesFragmentDataBinding: FragmentMoviesBinding
     private val binding get() = _moviesFragmentDataBinding
@@ -44,7 +37,6 @@ class MoviesFragment : Fragment(),MovieListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        moviesPopularViewModel = (activity as MainActivity).moviesPopularViewModel
         moviesPopularViewModel.refreshGetMovies()
         moviesAdapter = MovieAdapter(this)
         _moviesFragmentDataBinding = FragmentMoviesBinding.inflate(inflater, container, false)
