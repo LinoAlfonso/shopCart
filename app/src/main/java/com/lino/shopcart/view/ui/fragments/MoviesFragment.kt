@@ -73,8 +73,18 @@ class MoviesFragment : Fragment(),MovieListener {
                     }
                     is Resource.Error ->{
                         hideProgress()
-                        response.message?.let {
-                            println(it)
+                        lifecycleScope.launchWhenResumed {
+                            moviesPopularViewModel.getAllMoviesSave()
+                                .observe(viewLifecycleOwner, Observer { listMovies ->
+                                    moviesAdapter.updateData(listMovies)
+                                })
+                            withContext(Dispatchers.IO){
+                                response.message?.let {
+                                    Snackbar.make(binding.root, it,Snackbar.LENGTH_SHORT).apply {
+                                        show()
+                                    }
+                                }
+                            }
                         }
                     }
                     is Resource.Loading -> {

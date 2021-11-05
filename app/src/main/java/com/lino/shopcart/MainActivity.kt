@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val repository = MoviesRepository(ShopCartMovieDataBase(this))
-        val viewModelProviderFactory = MoviesPopularViewModelFactory(repository)
+        val viewModelProviderFactory = MoviesPopularViewModelFactory(application,repository)
         moviesPopularViewModel = ViewModelProvider(this,viewModelProviderFactory).get(MoviesPopularViewModel::class.java)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
