@@ -10,7 +10,7 @@ import com.lino.shopcart.models.Movie
 @Database(entities = arrayOf(Movie::class),version = 1)
 abstract class ShopCartMovieDataBase: RoomDatabase() {
     abstract fun movieDao():MovieDao
-    companion object{
+   /* companion object{
         @Volatile
         private var instance : ShopCartMovieDataBase? = null
         private var LOCK = Any()
@@ -26,5 +26,5 @@ abstract class ShopCartMovieDataBase: RoomDatabase() {
             ShopCartMovieDataBase::class.java,
             "shopCartMovie_db.db"
         ).build()
-    }
+    }*/
 }

@@ -4,9 +4,9 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
 }
-//apply plugin: 'kotlin-kapt'
-//apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdk 31
@@ -84,6 +84,10 @@ dependencies {
 
     implementation "androidx.room:room-runtime:2.3.0"
     kapt "androidx.room:room-compiler:2.3.0"
+
+    //dagger hilt
+    implementation "com.google.dagger:hilt-android:2.38.1"
+    kapt "com.google.dagger:hilt-android-compiler:2.38.1"
 
 
 }

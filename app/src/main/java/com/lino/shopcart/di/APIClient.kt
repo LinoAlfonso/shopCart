@@ -1,4 +1,4 @@
-package com.lino.shopcart.apiRetrofit
+package com.lino.shopcart.di
 
 import com.lino.shopcart.models.detailMovie.MovieDetail
 import com.lino.shopcart.models.detailMovie.SpokenLanguage

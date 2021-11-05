@@ -6,25 +6,22 @@ import android.net.ConnectivityManager
 import android.net.ConnectivityManager.*
 import android.net.NetworkCapabilities.*
 import android.os.Build
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.lino.shopcart.ShopCartApplication
-import com.lino.shopcart.apiRetrofit.RetrofitAPIHelper
-import com.lino.shopcart.models.response.MessageResponse
 import com.lino.shopcart.models.Movie
 import com.lino.shopcart.models.response.MoviesResponse
 import com.lino.shopcart.repository.MoviesRepository
 import com.lino.shopcart.utils.Resource
-import com.lino.shopcart.utils.Utils
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
+import javax.inject.Inject
 
-class MoviesPopularViewModel(
-    app:Application,
-    val moviesRepository: MoviesRepository
-):AndroidViewModel(app) {
+@HiltViewModel
+class MoviesPopularViewModel @Inject constructor(app:Application, val moviesRepository: MoviesRepository):AndroidViewModel(app) {
 
     val moviesPopular: MutableLiveData<Resource<MoviesResponse>> = MutableLiveData()
 
@@ -33,9 +30,6 @@ class MoviesPopularViewModel(
     }
 
     fun getMoviesPopular() = viewModelScope.launch {
-     /*   moviesPopular.postValue(Resource.Loading())
-        val response = moviesRepository.getMovies()
-        moviesPopular.postValue(handleMoviesResponse(response))*/
         safeGetMoviesPopular()
     }
 

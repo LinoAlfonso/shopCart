@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
@@ -14,14 +16,15 @@ import com.lino.shopcart.databinding.FragmentDetailMovieBinding
 import com.lino.shopcart.models.Movie
 import com.lino.shopcart.utils.bindImageUrl
 import com.lino.shopcart.viewmodel.MoviesPopularViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
+@AndroidEntryPoint
 class DetailMovieFragment : Fragment() {
 
-    private lateinit var moviesPopularViewModel: MoviesPopularViewModel
+    val moviesPopularViewModel:MoviesPopularViewModel by viewModels()
     private lateinit var _detailMovieBinding: FragmentDetailMovieBinding
     private val binding get() = _detailMovieBinding
     val args : DetailMovieFragmentArgs by navArgs()
@@ -36,7 +39,6 @@ class DetailMovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         movie = args.movie
-        moviesPopularViewModel = (activity as MainActivity).moviesPopularViewModel
         setupMovie()
         updateQuantity()
 
