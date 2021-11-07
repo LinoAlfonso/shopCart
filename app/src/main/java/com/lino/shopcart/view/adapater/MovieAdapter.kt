@@ -41,7 +41,7 @@ class MovieAdapter(val movieListener: MovieListener) : RecyclerView.Adapter<Movi
                 errorPlaceholder = R.drawable.ic_broken_image
             )
 
-            itemView.imgProduct.setOnClickListener {
+            itemView.movieId.setOnClickListener {
                 movieListener.onMovieClicked(item,100)
             }
 

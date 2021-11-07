@@ -27,9 +27,14 @@
         <argument
             android:name="movie"
             app:argType="com.lino.shopcart.models.Movie" />
+
     </fragment>
     <fragment
         android:id="@+id/shopCartFragment"
         android:name="com.lino.shopcart.view.ui.fragments.ShopCartFragment"
-        tools:layout="@layout/fragment_shop_cart" />
+        tools:layout="@layout/fragment_shop_cart">
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="www.movie.lino.com/shopCart" />
+    </fragment>
 </navigation>

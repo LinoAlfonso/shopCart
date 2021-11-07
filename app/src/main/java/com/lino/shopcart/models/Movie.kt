@@ -9,32 +9,32 @@ import java.io.Serializable
 )
 data class Movie (
     @SerializedName("adult")
-    val adult: Boolean,
+    var adult: Boolean,
     @SerializedName("backdrop_path")
-    val backdropPath: String,
+    var backdropPath: String,
     @PrimaryKey
     @SerializedName("id")
-    val id: Long,
+    var id: Long,
     @SerializedName("original_language")
-    val originalLanguage: String,
+    var originalLanguage: String,
     @SerializedName("original_title")
-    val originalTitle: String,
+    var originalTitle: String,
     @SerializedName("overview")
-    val overview: String,
+    var overview: String,
     @SerializedName("popularity")
-    val popularity: Double,
+    var popularity: Double,
     @SerializedName("poster_path")
-    val posterPath: String,
+    var posterPath: String,
     @SerializedName("release_date")
-    val releaseDate: String,
+    var releaseDate: String,
     @SerializedName("title")
-    val title: String,
+    var title: String,
     @SerializedName("video")
-    val video: Boolean,
+    var video: Boolean,
     @SerializedName("vote_average")
-    val voteAverage: Double,
+    var voteAverage: Double,
     @SerializedName("vote_count")
-    val voteCount: Long,
+    var voteCount: Long,
     var countCart: Int,
     var inShopCart:Boolean
 ):Serializable

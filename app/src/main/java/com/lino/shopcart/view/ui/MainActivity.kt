@@ -1,10 +1,11 @@
-package com.lino.shopcart
+package com.lino.shopcart.view.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.lino.shopcart.R
 import com.lino.shopcart.databinding.ActivityMainBinding
 import com.lino.shopcart.viewmodel.MoviesPopularViewModel
 import dagger.hilt.android.AndroidEntryPoint

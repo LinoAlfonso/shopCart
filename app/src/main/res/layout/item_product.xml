@@ -23,7 +23,8 @@
             android:orientation="vertical"
             android:padding="@dimen/margin_min"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:id="@+id/movieId">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgProduct"
