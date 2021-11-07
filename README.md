@@ -13,7 +13,7 @@ Este proyecto contiene las siguientes características.
 - Hilt DI
 - Room
 - Lottie
-- 
+- Mockito testing
 
 ## Guía de implementación
 
@@ -63,8 +63,9 @@ Este proyecto utiliza Dagger-Hilt para gestionar la inyección de dependencia.
 ## Capturas de pantalla
 
 <p align="center">
-  <img width="270" height="555" src="screenshots/screenshot_1.png">
-  <img width="270" height="555" src="screenshots/screenshot_3.png">
-  <img width="270" height="555" src="screenshots/screenshot_4.png">
+  <img width="270" height="555" src="screenshots/screenshot_1.jpg">
+  <img width="270" height="555" src="screenshots/screenshot_2.jpg">
+  <img width="270" height="555" src="screenshots/screenshot_3.jpg">
+  <img width="270" height="555" src="screenshots/screenshot_4.jpg">
 </p>
 
