@@ -1,4 +1,4 @@
-# Mi cine Merqueo
+# Mi cine
 
 Éste proyecto implementa Clean Architecture. Con esta aplicación los usuarios pueden ver todas las peliculas mas populares que se encuentran en cartelera.
 
